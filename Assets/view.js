@@ -6,6 +6,8 @@ class view {
     //TODO:viewDpt(){};
 
     // TODO:viewRoles(){};
+    
+    // TODO:viewBudgets(){};
 }
 
 module.exports = new view();
