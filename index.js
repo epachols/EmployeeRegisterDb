@@ -22,7 +22,6 @@ connection.connect(function (err) {
 })
 
 function init() {
-    // console.log("we done dinnit")
     // could consider calling the view all employees right here as a console.table()
     inq
     .prompt({
@@ -42,45 +41,54 @@ function init() {
         name: "firstchoice"
     })
     .then(function (response){
-        // console.log("PUT THE SWITCH CASE HERE, USE FROM PREV EXERCISE")
             if (response.firstchoice === "view all employees") {
                 console.log("you picked view all");
                 // view.viewAll();
+                // init();
             }
             if (response.firstchoice === "view all employees by department") {
                 console.log("you picked view all by dept");
                 // view.viewDpt();
+                // init();
             }
             if (response.firstchoice === "view all employees by manager") {
                 console.log("you picked view all by manager");
                 // view.viewMgr();
+                // init();
             }
             if (response.firstchoice === "view all roles") {
                 console.log("you want to look at all the roles");
                 // view.viewRoles();
+                // init();
             }
             if (response.firstchoice === "view department budgets") {
                 console.log("you want to look at the department salary budgets");
                 // view.viewBudgets();
+                // init();
             }
             if (response.firstchoice === "add an employee") {
                 console.log("you want to add");
-                // codeblock
+                // update.add();
+                // init();
             }
             if (response.firstchoice === "remove an employee") {
                 console.log("you want to remove");
-              // codeblock
+              // update.remove();
+              // init();
             }
             if (response.firstchoice === "update employee role") {
                 console.log("you want to update an employee role");
-              // codeblock
+              // update.role();
+              // init();
             }
             if (response.firstchoice === "update employee manager") {
                 console.log("you want to update an employee manager");
-              // codeblock
+              // update.manager();
+              // init();
             }
             if (response.firstchoice === "Quit") {
-                console.log("buhbye!")
+                console.log("Thank you for choosing CodeCrow Services courtesy of https://github.com/epachols!")
+                //secretBird( involves await or setinterval.);
             }
     })
 }
