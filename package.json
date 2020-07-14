@@ -19,6 +19,7 @@
   "homepage": "https://github.com/epachols/EmployeeRegisterDb#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "inquirer": "^7.3.2"
+    "inquirer": "^7.3.2",
+    "mysql": "^2.18.1"
   }
 }
