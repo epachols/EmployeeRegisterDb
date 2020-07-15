@@ -22,7 +22,6 @@ class view {
             console.table(res);
             console.log('\n \n');
         });
-
     };
 
     //TODO:viewMgr(){

@@ -1,6 +1,8 @@
 const inq = require("inquirer");
 const mysql = require("mysql");
 const view = require("./controllers/view")
+const update = require("./controllers/update")
+
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -18,7 +20,7 @@ connection.connect(function (err) {
     console.log("connected as id " + connection.threadId);
     console.log("please take the time to expand your window and make sure your command line prompt has at least 150 character spaces.")
     init();
-    connection.end();
+    // connection.end();
 })
 
 function init() {
@@ -68,9 +70,11 @@ function init() {
                 // init();
             }
             if (response.firstchoice === "add an employee") {
-                // update.addEmp();
-                // init();
+                update.addEmp(function(){
+                    init();
+                });
             }
+
             if (response.firstchoice === "remove an employee") {
               // update.removeEmp();
               // init();
@@ -98,3 +102,5 @@ function init() {
             }
     })
 }
+
+// init();
