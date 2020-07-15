@@ -90,10 +90,49 @@ class update {
       });
   }
 
+
+
+
+
+
+
+
   removeDept() {
     console.log("you wish to consolidate departments...\n");
     // query departments, then inq.prompt list which department? THEN
+    connection.query(
+        "SELECT department, id FROM department",
+        function (err, results) {
+          let depArr = [];
+          if (err) throw err;
+          results.forEach((thing) => {
+            depArr.push(thing.department);
+          });
+          inq.prompt({
+              type:"list",
+              message: "\n \n Please Choose which Department will be Downsized \n \n",
+              choices: depArr,
+              name: "deptoDelete"
+          }).then(function(response){
+  
+              connection.query("DELETE from department WHERE id = ?",
+              [depArr.indexOf(response.deptoDelete) + 1],
+              function(err, results) {
+                  if (err) throw err;
+                  console.log("Line 122 of update.js", "successfully removed the department in question.")
+                  callback();
+              })
+  
+          })
+          //here ends the original query function
+        });
   }
+
+
+
+
+
+
   removeRole() {
     console.log("you wish to streamline the roles...\n");
     // inq.prompt

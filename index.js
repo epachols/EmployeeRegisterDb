@@ -4,6 +4,7 @@ const view = require("./controllers/view")
 const update = require("./controllers/update")
 
 
+
 const connection = mysql.createConnection({
     host: "localhost",
     // Your port; if not 3306
@@ -40,7 +41,9 @@ function init() {
             "update employee manager",
             "remove an employee", 
             "remove a department",
+            "add a department",
             "remove a role",
+            "add a role",
              "Quit" ],
         name: "firstchoice"
     })
@@ -77,29 +80,39 @@ function init() {
 
             if (response.firstchoice === "remove an employee") {
               update.removeEmp(function(){
-                  init();
+                init();
               });
             }
             if (response.firstchoice === "remove a department") {
-              // update.removeDept();
+              update.removeDept(function(){
+                init();
+              });
+            } 
+            if (response.firstchoice === "add a department") {
+                // TODO:update.addDep();
+                // init();
+              }
+            if (response.firstchoice === "remove a role") {
+              // TODO:update.removeRole();
               // init();
             }
-            if (response.firstchoice === "remove a role") {
-              // update.removeRole();
+            if (response.firstchoice === "add a role") {
+              // TODO:update.addRole();
               // init();
             }
             if (response.firstchoice === "update employee role") {
-              // update.role();
+              // TODO:update.role();
               // init();
             }
             if (response.firstchoice === "update employee manager") {
-              // update.manager();
+              // TODO:update.manager();
               // init();
             }
             if (response.firstchoice === "Quit") {
                 console.log("Thank you for choosing CodeCrow Services courtesy of https://github.com/epachols")
                 connection.end();
-                //secretBird( involves await or setinterval.);
+                console.log("\n ... \n ..... \n ... ")
+                const sly = require("./assets/slycrow")
             }
     })
 }
