@@ -12,43 +12,87 @@ const connection = mysql.createConnection({
     database: "employee_db"
 });
 
-// CAN ALSO WRITE A CONSTRUCTOR THAT WRITES THE STUFF FOR YOU!
+
 class update {
+
   addEmp(callback) {
-    connection.query("SELECT title FROM role", function (err, results) {
-        let resultArr = [];
+    connection.query("SELECT title, id FROM role", function (err, results) {
+      let titleArr = [];
+      if (err) throw err;
+      results.forEach((thing) => {
+        titleArr.push(thing.title);
+      });
+      inq
+        .prompt([
+          {
+            type: "input",
+            message: "employee's first name",
+            name: "first_name",
+          },
+          {
+            type: "input",
+            message: "employee's last name",
+            name: "last_name",
+          },
+          {
+            type: "list",
+            message: "What role will the employee fill?",
+            choices: titleArr,
+            name: "role",
+          },
+        ])
+        .then(function (response) {
+          //response here being all the juicy deets that came out of the previous question
+          console.log(response);
+          connection.query(
+            "INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)",
+            [
+              response.first_name,
+              response.last_name,
+              titleArr.indexOf(response.role) + 1,
+            ],
+            function (err, res) {
+              if (err) throw err;
+              //TODO: use an additional inquiry here to ask which manager they want, then add search by MGR and swap MGR functions
+              callback();
+            }
+          );
+        });
+    });
+  } //Complete add employee function, besides adding manager info (one more nested inquiry, do after other basics are complete)
+
+  removeEmp(callback) {
+    connection.query(
+      "SELECT first_name, last_name, id FROM employee",
+      function (err, results) {
+        let empArr = [];
         if (err) throw err;
         results.forEach((thing) => {
-          resultArr.push(thing.title);
+          empArr.push(thing.first_name + thing.last_name);
         });
-        inq.prompt(
-            [{
-                type:"input",
-                message: "how are you feeling, jackass evan?",
-                name: "feels"
-            },
-            {
-                type:"input",
-                message: "how are you feeling, jackass evan?",
-                name: "feel"
-            }]
-        ).then(function(response) {
-            console.log(response);
-            callback();
+        inq.prompt({
+            type:"list",
+            message: "\n \n Please Choose which employee will be leaving us \n \n",
+            choices: empArr,
+            name: "emptoDelete"
+        }).then(function(response){
+
+            connection.query("DELETE from employee WHERE id = ?",
+            [empArr.indexOf(response.emptoDelete) + 1],
+            function(err, results) {
+                if (err) throw err;
+                console.log("Line 83 of update.js", "successfully removed the former employee in question.")
+                callback();
+            })
+
         })
-        
-        
+        //here ends the original query function
       });
-    //inserting paste from update above
   }
 
-  removeEmp() {
-    console.log("you wish to condense the team...\n");
-    // inq.prompt
-  }
   removeDept() {
     console.log("you wish to consolidate departments...\n");
-    // inq.prompt
+    // query departments, then inq.prompt list which department? THEN
   }
   removeRole() {
     console.log("you wish to streamline the roles...\n");
@@ -57,7 +101,8 @@ class update {
 
   role() {
     console.log("you wish to change an employee's role...\n");
-    // inq.prompt
+    // query employees,
+    // then which employee?
   }
 
   manager() {

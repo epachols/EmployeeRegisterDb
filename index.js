@@ -76,8 +76,9 @@ function init() {
             }
 
             if (response.firstchoice === "remove an employee") {
-              // update.removeEmp();
-              // init();
+              update.removeEmp(function(){
+                  init();
+              });
             }
             if (response.firstchoice === "remove a department") {
               // update.removeDept();
