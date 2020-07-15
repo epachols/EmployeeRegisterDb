@@ -1,6 +1,6 @@
 const inq = require("inquirer");
 const mysql = require("mysql");
-const view = require("./assets/view")
+const view = require("./controllers/view")
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -31,20 +31,21 @@ function init() {
             "view all employees", 
             "view all employees by department",
             "view all employees by manager",
-            "view all roles",
+            "view all employees by role",
             "view department budgets",
             "add an employee",
-            "remove an employee", 
             "update employee role", 
             "update employee manager",
+            "remove an employee", 
+            "remove a department",
+            "remove a role",
              "Quit" ],
         name: "firstchoice"
     })
     .then(function (response){
             if (response.firstchoice === "view all employees") {
-                console.log("you picked view all");
-                // view.viewAll();
-                // init();
+                view.viewAll();
+                init();
             }
             if (response.firstchoice === "view all employees by department") {
                 console.log("you picked view all by dept");
@@ -56,7 +57,7 @@ function init() {
                 // view.viewMgr();
                 // init();
             }
-            if (response.firstchoice === "view all roles") {
+            if (response.firstchoice === "view all employees by role") {
                 console.log("you want to look at all the roles");
                 // view.viewRoles();
                 // init();
@@ -67,27 +68,32 @@ function init() {
                 // init();
             }
             if (response.firstchoice === "add an employee") {
-                console.log("you want to add");
-                // update.add();
+                // update.addEmp();
                 // init();
             }
             if (response.firstchoice === "remove an employee") {
-                console.log("you want to remove");
-              // update.remove();
+              // update.removeEmp();
+              // init();
+            }
+            if (response.firstchoice === "remove a department") {
+              // update.removeDept();
+              // init();
+            }
+            if (response.firstchoice === "remove a role") {
+              // update.removeRole();
               // init();
             }
             if (response.firstchoice === "update employee role") {
-                console.log("you want to update an employee role");
               // update.role();
               // init();
             }
             if (response.firstchoice === "update employee manager") {
-                console.log("you want to update an employee manager");
               // update.manager();
               // init();
             }
             if (response.firstchoice === "Quit") {
-                console.log("Thank you for choosing CodeCrow Services courtesy of https://github.com/epachols!")
+                console.log("Thank you for choosing CodeCrow Services courtesy of https://github.com/epachols")
+                connection.end();
                 //secretBird( involves await or setinterval.);
             }
     })

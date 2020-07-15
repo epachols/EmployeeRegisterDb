@@ -1,19 +1,48 @@
 USE employee_db;
 
-INSERT INTO department (name)
-VALUES ("fish"),("chips"),("sweets");
+INSERT INTO department (department)
+VALUES ("Sales"),("Marketing"),("Legal"),("Engineering");
 
 INSERT INTO role (title, salary, department_id)
-VALUES ("lead", 70000, 1), 
-("day", 40000, 1),
-("fishypro", 70000, 2), 
-("fishyjr", 40000, 2),
-("candyman", 130000, 3);
-
-INSERT INTO role (first_name, last_name, role_id, manager_id)
 VALUES 
-("Jim","Jones", 1), -- this should make jim jones a Lead in the fish dept.
-("tracy","montloe", 2), -- should make tracy a day in fish dpt.
-("mr","bubbles", 5)
+("Sales Lead", 90000, 1), 
+("Sales Team", 70000, 1),
+("Marketing Lead", 100000, 2), 
+("Market Research", 40000, 2),
+("Legal Supervisor", 180000, 3),
+("Legal Team", 110000, 3),
+("Legal Intern", 40000, 3),
+("Lead Engineer", 140000, 4),
+("Senior Engineer", 130000, 4),
+("Junior Engineer", 110000, 4);
 
--- functional seed
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES 
+
+("Jim","Jones", 1), 
+("Tracy","Montloe", 2), 
+("Jennifer","Connelly", 2),
+
+("Erica","Caldwell", 3),
+("Tim","Fredericks", 4),
+("Jan","Jayse", 5),
+
+("Ace","Fritz", 6),
+("Champ","Fritz", 6),
+("Mikey","Donnelly", 7),
+
+("Dill","pickles", 10),
+("Tommy","pickles", 8),
+("Angelica","pickles", 9);
+
+
+
+
+--the following string is to PULL ALL EMPLOYEES! WOOHOO
+
+SELECT
+    employee.first_name, employee.last_name, role.title, role.salary, department.department
+FROM role
+INNER JOIN employee ON role_id = role.id
+INNER JOIN department ON department.id = role.department_id
+ORDER BY department ASC; 

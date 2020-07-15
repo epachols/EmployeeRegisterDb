@@ -1,7 +1,29 @@
+const mysql = require("mysql");
+
+const connection = mysql.createConnection({
+    host: "localhost",
+    // Your port; if not 3306
+    port: process.env.PORT || 3306,
+    // Your username
+    user: "root",
+    // Your password
+    password: "password",
+    database: "employee_db"
+});
+
+// CAN ALSO WRITE A CONSTRUCTOR THAT WRITES THE STUFF FOR YOU!
 class view {
-    //TODO:viewAll(){
-        //do this one first. simple query for all, see exercise 10 GreatBay.
-    // };
+    viewAll(){
+        console.log("you picked view all...\n");
+        connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.department FROM role INNER JOIN employee ON role_id = role.id INNER JOIN department ON department.id = role.department_id ORDER BY department ASC;",
+         function (err, res) {
+            if (err) throw err;
+            console.log('\n \n');
+            console.table(res);
+            console.log('\n \n');
+        });
+
+    };
 
     //TODO:viewMgr(){
         // bring back all manager possibilities, filter for uniqueness, set as options for choice
@@ -15,7 +37,8 @@ class view {
     // };
 
     // TODO:viewRoles(){
-        // bring back the roles of all the employees, filtered for uniqueness,as a table
+    //     // view a list of employees by role,
+    //     console.log("you picked view employees by role...\n");
     // };
     
     // TODO:viewBudget(){
