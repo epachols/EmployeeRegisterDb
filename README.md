@@ -8,7 +8,7 @@
   |     [Tests](#tests)           |
   |    [Questions](#questions)    |
   |    [Credits](#credits)        |
-  |     [License](#license)       |
+  |     [License](#licensing)       |
   
   ## Description
   
@@ -16,13 +16,13 @@
   
   ## Installation
   
- This Employee Management System depends on the inquirer and mysql packages from NPM, be sure to read their docs and install from the Command Line before attempting to use this app.
+ This Employee Management System depends on the [InquirerJs](https://www.npmjs.com/package/inquirer/v/0.2.3) and [MySQL](https://www.npmjs.com/package/mysql) packages from NPM, be sure to read their docs and install from the Command Line before attempting to use this app.
   
   
   ## Usage 
   
 
-  run the Command Line "node index", and you will be led through a series of questions after setting up your basic table information as a SQL database. (Run the included Scheme and Seed in mysql workbench and have a mySQL local server running to make full use of the app. 
+  run the Command Line "node index", and you will be led through a series of questions after setting up your basic table information as a SQL database. (Run the included Scheme.sql code in mysql workbench and have a mySQL local server running to make full use of the app. 
 
   - ![Preview](/assets/preview.png)
   
@@ -49,7 +49,7 @@
   
  None
   
-  ## License information:
+  ## Licensing:
   
  
   CC0 ![License: CC0-1.0](https://licensebuttons.net/l/zero/1.0/80x15.png) [License Document](https://creativecommons.org/publicdomain/zero/1.0/)
