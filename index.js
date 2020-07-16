@@ -75,7 +75,9 @@ function init() {
 
         //FOR DEALING WITH EMPLOYEES from the EMPLOYEE controller
         if (response.firstchoice === "view all employees") {
-          emp.viewAll(() => init());
+          emp.viewAll(() => {
+            init()
+          });
         }
         if (response.firstchoice === "add an employee") {
           emp.addEmp(() => init());
@@ -115,7 +117,7 @@ function init() {
         }
 
         if (response.firstchoice === "remove a role") {
-          role.removeRole(() =>init());
+          role.removeRole(() => init());
         }
         
        

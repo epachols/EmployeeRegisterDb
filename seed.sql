@@ -35,14 +35,3 @@ VALUES
 ("Tommy","pickles", 8),
 ("Angelica","pickles", 9);
 
-
-
-
---the following string is to PULL ALL EMPLOYEES! WOOHOO
-
-SELECT
-    employee.first_name, employee.last_name, role.title, role.salary, department.department
-FROM role
-INNER JOIN employee ON role_id = role.id
-INNER JOIN department ON department.id = role.department_id
-ORDER BY department ASC; 

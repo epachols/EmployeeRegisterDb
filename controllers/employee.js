@@ -115,19 +115,21 @@ class emp {
   updateRole(callback) {
     console.log("Let's update an employee Role...\n");
     connection.query(
-      "SELECT employee.first_name, employee.last_name, role_id, title, role.salary, department.department FROM role INNER JOIN employee ON role_id = role.id INNER JOIN department ON department.id = role.department_id ORDER BY department ASC;",
+      "SELECT employee.first_name, employee.last_name, employee.id, role_id, title, role.salary, department.department FROM role INNER JOIN employee ON role_id = role.id INNER JOIN department ON department.id = role.department_id ORDER BY id ASC;",
       function (err, results) {
         if (err) throw err;
         console.log("\n \n");
         // console.table(results);
         // console.log("\n \n");
         let empArr = [];
-        let idArr = [];
+        let empIdArr = [];
+        let roleIdArr = [];
         let roleArr = [];
         if (err) throw err;
         results.forEach((thing) => {
           empArr.push(`${thing.first_name} ${thing.last_name}`);
-          idArr.push(thing.role_id);
+          empIdArr.push(thing.id)
+          roleIdArr.push(thing.role_id);
           roleArr.push(thing.title);
         });
         //BEGINNING THE INQUIRER PROMPT INSIDE THE FIRST CONNECTION QUERY
@@ -146,14 +148,16 @@ class emp {
           },
       
           ]).then(function (response){
+            //problem is in roleID picked
             let rolePicked = response.roleToUpdate
-            let roleIdPicked = idArr[empArr.indexOf(rolePicked)]
-            let empToReRole = (response.empToUpdate).split(" ")
-            //BEGINNING THE UPDATE QUERY INSIDE THE INQUIRER PROMPT
-            connection.query("UPDATE employee SET role_id = ? WHERE ? AND ?",
-             [
-               roleIdPicked, `first_name = ${empToReRole[0]}`,`last_name = ${empToReRole[1]}`
-             ], 
+            let roleIdPicked = roleIdArr[roleArr.indexOf(rolePicked)]
+            let empIdPicked = roleIdArr[empArr.indexOf(response.empToUpdate)]
+            console.log("roleIdPicked", roleIdPicked)
+            
+
+            // BEGINNING THE UPDATE QUERY INSIDE THE INQUIRER PROMPT
+            connection.query("UPDATE employee SET role_id = ? WHERE id = ?",
+             [roleIdPicked, empIdPicked], 
              function(err,res){
               if (err) throw err;
               console.log(`\n We have successfully switched your employee's role.`)
@@ -167,6 +171,7 @@ class emp {
     
   }
 }
+
 
 
 
