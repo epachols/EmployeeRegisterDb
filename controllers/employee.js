@@ -17,6 +17,7 @@ class emp {
   } //WORKS
 
   addEmp(callback) {
+    console.log("\n~~~~~~~~~~~~~~~~Add An Employee~~~~~~~~~~~~~~~~~~~~\n")
     connection.query("SELECT title, id FROM role ORDER BY id ASC;",
      function (err,results) {
       let roleArr = [];
@@ -65,6 +66,7 @@ class emp {
   } //WORKS
 
   removeEmp(callback) {
+    console.log("\n~~~~~~~~~~~~~~~~Remove An Employee~~~~~~~~~~~~~~~~~~~~\n")
     connection.query(
       "SELECT first_name, last_name, id FROM employee ORDER BY id ASC;",
       function (err, results) {
@@ -102,7 +104,7 @@ class emp {
   } //WORKS
   
   updateRole(callback) {
-    console.log("Let's update an employee Role...\n");
+    console.log("\n~~~~~~~~~~Let's update an employee Role...~~~~~~~~~~~\n")
     connection.query(
       "SELECT employee.first_name, employee.last_name, employee.id, role_id, title, role.salary, department.department FROM role INNER JOIN employee ON role_id = role.id INNER JOIN department ON department.id = role.department_id ORDER BY id ASC;",
       function (err, results) {
@@ -162,9 +164,6 @@ class emp {
     
   }
 }
-
-
-
 
 //TODO:viewMgr(){     
     // };

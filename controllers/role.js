@@ -3,7 +3,7 @@ const connection = require("./connection")
 
 class role {
   addRole(callback) {
-    console.log("So you want to add a role... \n");
+    console.log("\n~~~~~~~~~So you want to add a role...~~~~~~~~~~~~~\n");
     connection.query(
       "SELECT title, salary, department, role.id, department_id FROM role INNER JOIN department ON department.id = department_id ORDER BY department.id ASC;",
       function (err, res) {
@@ -50,7 +50,7 @@ class role {
   }
 
   removeRole(callback) {
-    console.log("you wish to streamline the roles...\n");
+    console.log("\n~~~~~~~~~You wish to streamline the roles...~~~~~~~~\n");
     // query departments, then inq.prompt list which department? THEN
     connection.query("SELECT title, id FROM role ORDER BY id", function (
       err,
@@ -78,7 +78,7 @@ class role {
             function (err, results) {
               if (err) throw err;
               console.log(
-                `successfully removed role, Goodbye ${response.deptoDelete} ! \n`
+                `successfully removed role! \n`
               );
               callback();
             }
@@ -88,7 +88,7 @@ class role {
   }
 
   viewRoles(callback) {
-    console.log("you picked all Roles...\n \n");
+    console.log("\n~~~~~~~~~~Viewing all Roles..~~~~~~~~~~~\n")
     connection.query(
       "SELECT title, salary, department FROM role INNER JOIN department ON department.id = department_id ORDER BY department.id ASC;",
       function (err, res) {

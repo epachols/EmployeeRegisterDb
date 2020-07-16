@@ -5,7 +5,8 @@ const role = require("./controllers/role");
 const connection = require("./controllers/connection");
 
 function init() {
-    console.log("\n \n")
+  //ascii art for welcome mat
+    console.log(`\n ____  __  __  ____  __    _____  _  _  ____  ____ \n( ___)(  \\/  )(  _ \\(  )  (  _  )( \\/ )( ___)( ___)\n )__)  )    (  )___/ )(__  )(_)(  \\  /  )__)  )__) \n(____)(_/\\/\\_)(__)  (____)(_____) (__) (____)(____)\n __  __    __    _  _    __    ___  ____  ____ \n(  \\/  )  /__\\  ( \\( )  /__\\  / __)( ___)(  _ ) \n )    (  /(__)\\  )  (  /(__)\\( (_-. )__)  )  / \n(_/\\/\\_)(__)(__)(_)\\_)(__)(__)\\___/(____)(_)\\_) \n`)
     inq
       .prompt({
         type: "list",

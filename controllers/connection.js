@@ -13,9 +13,8 @@ const connection = mysql.createConnection({
 
 connection.connect(function (err) {
     if (err) throw err;
-    console.log("connected as id " + connection.threadId);
-    console.log("please take the time to expand your window and make sure your command line prompt has at least 150 character spaces.")
-    // init();
+    console.log("\n \n");
+    console.log("please take the time to expand your window, \n make sure your command line prompt has at least 150 character spaces.")
 })
 
 module.exports = connection

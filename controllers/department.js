@@ -3,7 +3,7 @@ const connection = require("./connection")
 
 class department {
   addDept(callback) {
-    console.log("So you want to add a department... \n");
+    console.log("\n~~~~~~~~~~~~~~~~So you want to add a department...~~~~~~~~~~~~\n");
     inq
       .prompt([
         {
@@ -27,7 +27,7 @@ class department {
   }
 
   removeDept(callback) {
-    console.log("you wish to consolidate departments...\n");
+    console.log("\n~~~~~~~~~~~~~~~~you wish to consolidate departments...~~~~~~~~~~~\n");
     // query departments, then inq.prompt list which department? THEN
     connection.query(
       "SELECT department, id FROM department ORDER BY id",
@@ -66,7 +66,7 @@ class department {
   }
 
   viewDpts(callback) {
-    console.log("\n \n you picked view all departments...\n");
+    console.log("\n~~~~~~~~~~~~~~~~~~Viewing all departments...~~~~~~~~~~~~~~~~~~\n");
     connection.query(
       "SELECT department, id FROM department ORDER BY id ASC;",
       function (err, res) {
