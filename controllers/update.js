@@ -59,37 +59,48 @@ class update {
           );
         });
     });
-  } //Complete add employee function, besides adding manager info (one more nested inquiry, do after other basics are complete)
+  } //WORKS
 
   removeEmp(callback) {
     connection.query(
-      "SELECT first_name, last_name, id FROM employee",
+      "SELECT first_name, last_name, id FROM employee ORDER BY id ASC;",
       function (err, results) {
         let empArr = [];
         if (err) throw err;
         results.forEach((thing) => {
-          empArr.push(thing.first_name + thing.last_name);
+          empArr.push(`${thing.first_name} ${thing.last_name}`);
         });
+        console.table(results);
         inq.prompt({
             type:"list",
             message: "\n \n Please Choose which employee will be leaving us \n \n",
             choices: empArr,
             name: "emptoDelete"
         }).then(function(response){
-
+            let deletedEmp = response.emptoDelete
+            console.log[empArr.indexOf(response.emptoDelete)]
+            console.log("line 80 update", deletedEmp)
             connection.query("DELETE from employee WHERE id = ?",
             [empArr.indexOf(response.emptoDelete) + 1],
             function(err, results) {
                 if (err) throw err;
-                console.log("Line 83 of update.js", "successfully removed the former employee in question.")
+                // console.log(`successfully removed the former employee in question. Buhbye! Thanks for all your hard work, ${deletedEmp}`)
                 callback();
             })
 
         })
-        //here ends the original query function
+        // here ends the original query function
       });
-  }
-
+  } //NOT WORKING YET
+//TODO::
+//TODO::
+//TODO::
+//TODO::MUST FIX the comparison of ID to ID in each removal. IT WON"T WORK! MUST DO WHERE
+//TODO::
+//TODO::
+//TODO::
+//TODO::
+//TODO::
 
   removeDept(callback) {
     console.log("you wish to consolidate departments...\n");
@@ -122,8 +133,6 @@ class update {
         });
   } //works
 
-
-
   addDept(callback) {
       console.log("So you want to add a department... \n")
     inq
@@ -154,7 +163,7 @@ class update {
     // inq.prompt
   }
 
-  role() {
+  updateRole() {
     console.log("you wish to change an employee's role...\n");
     // query employees,
     // then which employee?

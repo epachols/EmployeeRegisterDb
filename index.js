@@ -105,7 +105,7 @@ function init() {
           // init();
         }
         if (response.firstchoice === "update employee role") {
-          // TODO:update.role();
+          // TODO:update.updateRole();
           // init();
         }
         if (response.firstchoice === "update employee manager") {
