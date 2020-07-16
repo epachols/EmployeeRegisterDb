@@ -16,7 +16,7 @@ CREATE TABLE role (
   id INT NOT NULL AUTO_INCREMENT,
   title VARCHAR(30) NOT NULL,
   salary DECIMAL NOT NULL,
-  department_id INT NULL,
+  department_id INT NULL DEFAULT 1,
   PRIMARY KEY (id)
   );
 
@@ -32,7 +32,7 @@ CREATE TABLE employee (
 
 
 INSERT INTO department (department)
-VALUES ("Sales"),("Marketing"),("Legal"),("Engineering");
+VALUES ("None"),("Sales"),("Marketing"),("Legal"),("Engineering");
 
 INSERT INTO role (title, salary, department_id)
 VALUES 

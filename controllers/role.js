@@ -42,23 +42,18 @@ class role {
             {
               type: "list",
               message: "would you like to assign them a department?",
-              choices: [...depArry, "no"],
+              choices: depArry,
               name: "deptAssignment"
             },
           ])
           .then(function (response) {
-            let chosenDepId;
-              if (depArry.includes(response.deptAssignment)) {
-                  chosenDepId = idArry[
-                    depArry.indexOf(response.deptAssignment)
-                  ]
-              } else {chosenDepId = null}
+            let chosenDepId = idArry[depArry.indexOf(response.deptAssignment)]
             connection.query("INSERT INTO role (title, salary, department_id) VALUES (?,?,?)",
              [response.title, response.salary, chosenDepId ],
               function (err, res) {
                 if (err) throw err;
-                console.log("oh yeah, we added that role son")
-                callback(); //TODO: put me inside your last nested function!
+                console.log("Ok, We've add that role to your EmployeeRegisterDb")
+                callback(); 
             })
           });
       }
@@ -115,7 +110,7 @@ class role {
         callback();
       }
     );
-  } //WORKS
+  } 
 }
 
 
