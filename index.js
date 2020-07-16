@@ -1,10 +1,13 @@
 const inq = require("inquirer");
 const mysql = require("mysql");
-const view = require("./controllers/view")
-const update = require("./controllers/update")
+// const view = require("./controllers/view");
+// const update = require("./controllers/update");
+const employee = require("./controllers/employee");
+const department = require("./controllers/department");
+const role = require("./controllers/role");
 
-//TODO: CHECK IF I NEED TO HAVE EXPRESS? IF SO, ADD IN EXPRESS BOILERPLATE
-
+//TODO: add validation for NO SPACES to all text input for split reasons
+//TODO: add validation for ingteger value salaries to all text input for split reasons
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -31,40 +34,30 @@ function init() {
         type: "list",
         message: "What would you like to do next?",
         choices: [
+            
+            // TODO:"view all employees by manager",
+            // TODO:"update employee manager",
+            // TODO:assigning a manager to employees,
+            // TODO:"view department budgets",
+            
+            //employee functions
           "view all employees", //WORKS
-
-          // TODO:"view all employees by manager",
-          // TODO:"view department budgets",
-
           "add an employee", //WORKS
-
-          "update employee manager",
-
-          "remove an employee",
-          "view all departments", //WORKS except not calling function again?
+          "remove an employee", //WORKS
+          // department functions
+          "view all departments", //WORKS
           "add a department", //WORKS
           "remove a department", //WORKS
+          //role functions
           "view all roles", //WORKS
-          "add a role",
-          "remove a role",
-          "update employee role",
-          "Quit",
+          "add a role", //WORKS
+          "remove a role", //WORKS
+        //   "update employee role",
+          "Quit", 
         ],
         name: "firstchoice",
       })
       .then(function (response) {
-        if (response.firstchoice === "view all employees") {
-          view.viewAll(()=>init());
-        }
-        if (response.firstchoice === "view all departments") {
-            console.log("you picked view all departments");
-            view.viewDpts
-        }
-        if (response.firstchoice === "view all departments") {
-          console.log("you picked view all departments");
-          view.viewDpts(()=>init());
-        }
-
         // if (response.firstchoice === "view all employees by manager") {
         //     console.log("you picked view all by manager");
         //     // TODO:view.viewMgr();
@@ -75,51 +68,67 @@ function init() {
         //     // TODO:view.viewBudgets();
         //     // init();
         // }
+        // if (response.firstchoice === "update employee manager") {
+        //   // TODO:update.manager();
+        //   // init();
+        // }
 
-        if (response.firstchoice === "view all roles") {
-          console.log("you want to look at all the roles");
-          view.viewRoles();
-          init();
+        //FOR DEALING WITH EMPLOYEES from the EMPLOYEE controller
+        if (response.firstchoice === "view all employees") {
+          employee.viewAll(() => init());
         }
         if (response.firstchoice === "add an employee") {
-          update.addEmp(function () {
-            init();
-          });
+          employee.addEmp(() => init());
         }
 
         if (response.firstchoice === "remove an employee") {
-          update.removeEmp(()=>init());
+          employee.removeEmp(()=>init());
         }
+
+
+        //FOR DEALING WITH departments from the DEPARTMENT controller
+        if (response.firstchoice === "view all departments") {
+            console.log("you picked view all departments");
+            department.viewDpts(()=>init());
+          }
+
         if (response.firstchoice === "remove a department") {
-          update.removeDept(()=>init());
+          department.removeDept(()=>init());
         }
+
         if (response.firstchoice === "add a department") {
-          update.addDept(()=>init());
+          department.addDept(()=>init());
         }
-        if (response.firstchoice === "remove a role") {
-          // TODO:update.removeRole();
-          // init();
+
+
+
+        //FOR DEALING WITH ROLES from the ROLE controller
+        if (response.firstchoice === "view all roles") {
+            role.viewRoles(()=>init());
         }
+
         if (response.firstchoice === "add a role") {
-          // TODO:update.addRole();
-          // init();
+        role.addRole(()=>init());
         }
-        if (response.firstchoice === "update employee role") {
-          // TODO:update.updateRole();
-          // init();
+
+        if (response.firstchoice === "remove a role") {
+          role.removeRole(() =>init());
         }
-        if (response.firstchoice === "update employee manager") {
-          // TODO:update.manager();
-          // init();
-        }
+        
+        // if (response.firstchoice === "update employee role") {
+        //   // TODO:employee.updateRole();
+        //   // init();
+        // }
+    
+
         if (response.firstchoice === "Quit") {
           console.log(
             "Thank you for choosing CodeCrow Services courtesy of https://github.com/epachols"
           );
-          connection.end();
           console.log("\n ... \n ..... \n ... ");
-          require("./assets/slycrow");
-        }
+        //   const raven = require("./assets/slycrow");
+        return connection.end();
+    }
       });
 }
 

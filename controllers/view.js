@@ -13,37 +13,11 @@ const connection = mysql.createConnection({
 
 // CAN ALSO WRITE A CONSTRUCTOR THAT WRITES THE STUFF FOR YOU!
 class view {
-    viewAll(callback){
-        console.log("you picked view all...\n");
-        connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.department FROM role INNER JOIN employee ON role_id = role.id INNER JOIN department ON department.id = role.department_id ORDER BY department ASC;",
-         function (err, res) {
-            if (err) throw err;
-            console.log('\n \n');
-            console.table(res);
-            console.log('\n \n');
-            callback();
-        });
-    };
 
-    //TODO:viewMgr(){
-       
-    // };
-
-    viewDpts(callback){
-        console.log("\n \n you picked view all departments...\n");
-        connection.query("SELECT department, id FROM department ORDER BY id ASC;",
-         function (err, res) {
-            if (err) throw err;
-            console.log('\n \n');
-            console.table(res);
-            console.log('\n \n');
-            callback();
-        });
-    };
 
     viewRoles(callback){
-        console.log("you picked view employees by role...\n");
-        connection.query("SELECT title, salary, id FROM role ORDER BY id ASC;",
+        console.log("you picked all Roles...\n \n");
+        connection.query("SELECT title, salary, department FROM role INNER JOIN department ON department.id = department_id ORDER BY department.id ASC;",
          function (err, res) {
              if (err) throw err;
             console.log('\n \n');
@@ -51,7 +25,7 @@ class view {
             console.log('\n \n');
             callback();
         });
-    };
+    }; //WORKS
     
     // TODO:viewBudget(){
     // this would involve asking which department

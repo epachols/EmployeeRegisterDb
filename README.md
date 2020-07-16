@@ -146,7 +146,7 @@ notes from the gif
 script is "npm start"
 
 first level has listed options for :
-view all employees
+<!-- view all employees -->
 view all by department
 view all by manager
 
@@ -159,3 +159,5 @@ update employee manager
 
 view all roles
 view department budgets
+
+
