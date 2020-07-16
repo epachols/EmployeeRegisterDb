@@ -151,8 +151,10 @@ class emp {
             //problem is in roleID picked
             let rolePicked = response.roleToUpdate
             let roleIdPicked = roleIdArr[roleArr.indexOf(rolePicked)]
-            let empIdPicked = roleIdArr[empArr.indexOf(response.empToUpdate)]
+            let empIdPicked = empIdArr[empArr.indexOf(response.empToUpdate)]
             console.log("roleIdPicked", roleIdPicked)
+            console.log("empidpicked", empIdPicked)
+
             
 
             // BEGINNING THE UPDATE QUERY INSIDE THE INQUIRER PROMPT

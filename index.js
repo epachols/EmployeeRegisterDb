@@ -41,37 +41,24 @@ function init() {
             // TODO:"view department budgets",
             
             //employee functions
-          "view all employees", //WORKS
-          "add an employee", //WORKS
+          "view all employees", 
+          "add an employee", 
           "update employee role",
-          "remove an employee", //WORKS
+          "remove an employee", 
           // department functions
-          "view all departments", //WORKS
-          "add a department", //WORKS
-          "remove a department", //WORKS
+          "view all departments", 
+          "add a department", 
+          "remove a department", 
           //role functions
-          "view all roles", //WORKS
-          "add a role", //WORKS
-          "remove a role", //WORKS
+          "view all roles", 
+          "add a role", 
+          "remove a role", 
           "Quit", 
         ],
         name: "firstchoice",
       })
       .then(function (response) {
-        // if (response.firstchoice === "view all employees by manager") {
-        //     console.log("you picked view all by manager");
-        //     // TODO:view.viewMgr();
-        //     // init();
-        // }
-        // if (response.firstchoice === "view department budgets") {
-        //     console.log("you want to look at the department salary budgets");
-        //     // TODO:view.viewBudgets();
-        //     // init();
-        // }
-        // if (response.firstchoice === "update employee manager") {
-        //   // TODO:update.manager();
-        //   // init();
-        // }
+    
 
         //FOR DEALING WITH EMPLOYEES from the EMPLOYEE controller
         if (response.firstchoice === "view all employees") {
@@ -127,7 +114,7 @@ function init() {
             "Thank you for choosing CodeCrow Services courtesy of https://github.com/epachols"
           );
           console.log("\n ... \n ..... \n ... ");
-        //   const raven = require("./assets/slycrow");
+          const raven = require("./assets/slycrow");
         return connection.end();
     }
       });

@@ -5,6 +5,7 @@ VALUES ("Sales"),("Marketing"),("Legal"),("Engineering");
 
 INSERT INTO role (title, salary, department_id)
 VALUES 
+("NEEDS NEW ROLE", 0, null),
 ("Sales Lead", 90000, 1), 
 ("Sales Team", 70000, 1),
 ("Marketing Lead", 100000, 2), 
