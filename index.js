@@ -1,31 +1,8 @@
 const inq = require("inquirer");
-const mysql = require("mysql");
-// const view = require("./controllers/view");
-// const update = require("./controllers/update");
 const emp = require("./controllers/employee");
 const department = require("./controllers/department");
 const role = require("./controllers/role");
-
-//TODO: add validation for NO SPACES to all text input for split reasons
-//TODO: add validation for ingteger value salaries to all text input for split reasons
-
-const connection = mysql.createConnection({
-    host: "localhost",
-    // Your port; if not 3306
-    port: process.env.PORT || 3306,
-    // Your username
-    user: "root",
-    // Your password
-    password: "password",
-    database: "employee_db"
-});
-
-connection.connect(function (err) {
-    if (err) throw err;
-    console.log("connected as id " + connection.threadId);
-    console.log("please take the time to expand your window and make sure your command line prompt has at least 150 character spaces.")
-    init();
-})
+const connection = require("./controllers/connection");
 
 function init() {
     console.log("\n \n")
@@ -115,10 +92,11 @@ function init() {
           );
           console.log("\n ... \n ..... \n ... ");
           const raven = require("./assets/slycrow");
-        return connection.end();
+          raven();
+        connection.end();
     }
       });
-      return
+      // return 
 }
 
-// init();
+init();
