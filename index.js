@@ -118,6 +118,7 @@ function init() {
         return connection.end();
     }
       });
+      return
 }
 
 // init();
