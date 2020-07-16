@@ -2,7 +2,7 @@ const inq = require("inquirer");
 const mysql = require("mysql");
 // const view = require("./controllers/view");
 // const update = require("./controllers/update");
-const employee = require("./controllers/employee");
+const emp = require("./controllers/employee");
 const department = require("./controllers/department");
 const role = require("./controllers/role");
 
@@ -43,6 +43,7 @@ function init() {
             //employee functions
           "view all employees", //WORKS
           "add an employee", //WORKS
+          "update employee role",
           "remove an employee", //WORKS
           // department functions
           "view all departments", //WORKS
@@ -52,7 +53,6 @@ function init() {
           "view all roles", //WORKS
           "add a role", //WORKS
           "remove a role", //WORKS
-        //   "update employee role",
           "Quit", 
         ],
         name: "firstchoice",
@@ -75,16 +75,19 @@ function init() {
 
         //FOR DEALING WITH EMPLOYEES from the EMPLOYEE controller
         if (response.firstchoice === "view all employees") {
-          employee.viewAll(() => init());
+          emp.viewAll(() => init());
         }
         if (response.firstchoice === "add an employee") {
-          employee.addEmp(() => init());
+          emp.addEmp(() => init());
         }
 
         if (response.firstchoice === "remove an employee") {
-          employee.removeEmp(()=>init());
+          emp.removeEmp(()=>init());
         }
-
+        if (response.firstchoice === "update employee role") {
+            emp.updateRole(()=>init());
+          }
+      
 
         //FOR DEALING WITH departments from the DEPARTMENT controller
         if (response.firstchoice === "view all departments") {
@@ -115,11 +118,7 @@ function init() {
           role.removeRole(() =>init());
         }
         
-        // if (response.firstchoice === "update employee role") {
-        //   // TODO:employee.updateRole();
-        //   // init();
-        // }
-    
+       
 
         if (response.firstchoice === "Quit") {
           console.log(

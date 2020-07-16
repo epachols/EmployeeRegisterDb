@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
     database: "employee_db"
 });
 
-class employee {
+class emp {
   viewAll(callback) {
     console.log("you picked view all...\n");
     connection.query(
@@ -28,10 +28,8 @@ class employee {
   } //WORKS
 
   addEmp(callback) {
-    connection.query("SELECT title, id FROM role ORDER BY id ASC;", function (
-      err,
-      results
-    ) {
+    connection.query("SELECT title, id FROM role ORDER BY id ASC;",
+     function (err,results) {
       let roleArr = [];
       let idArr = [];
       if (err) throw err;
@@ -70,7 +68,6 @@ class employee {
             [response.first_name, response.last_name, roleIdToAdd],
             function (err, res) {
               if (err) throw err;
-              //TODO: use an additional inquiry here to ask which manager they want, then add search by MGR and swap MGR functions
               callback();
             }
           );
@@ -114,14 +111,69 @@ class employee {
       }
     );
   } //WORKS
+  
+  updateRole(callback) {
+    console.log("Let's update an employee Role...\n");
+    connection.query(
+      "SELECT employee.first_name, employee.last_name, role_id, title, role.salary, department.department FROM role INNER JOIN employee ON role_id = role.id INNER JOIN department ON department.id = role.department_id ORDER BY department ASC;",
+      function (err, results) {
+        if (err) throw err;
+        console.log("\n \n");
+        // console.table(results);
+        // console.log("\n \n");
+        let empArr = [];
+        let idArr = [];
+        let roleArr = [];
+        if (err) throw err;
+        results.forEach((thing) => {
+          empArr.push(`${thing.first_name} ${thing.last_name}`);
+          idArr.push(thing.role_id);
+          roleArr.push(thing.title);
+        });
+        //BEGINNING THE INQUIRER PROMPT INSIDE THE FIRST CONNECTION QUERY
+        inq.prompt([
+          {
+            type: "list",
+            message: "Which Employee do you want to update the role for?",
+            choices: empArr,
+            name: "empToUpdate"
+          },
+          {
+            type: "list",
+            message: "Which do you want their new role to be?",
+            choices: roleArr,
+            name: "roleToUpdate"
+          },
+      
+          ]).then(function (response){
+            let rolePicked = response.roleToUpdate
+            let roleIdPicked = idArr[empArr.indexOf(rolePicked)]
+            let empToReRole = (response.empToUpdate).split(" ")
+            //BEGINNING THE UPDATE QUERY INSIDE THE INQUIRER PROMPT
+            connection.query("UPDATE employee SET role_id = ? WHERE ? AND ?",
+             [
+               roleIdPicked, `first_name = ${empToReRole[0]}`,`last_name = ${empToReRole[1]}`
+             ], 
+             function(err,res){
+              if (err) throw err;
+              console.log(`\n We have successfully switched your employee's role.`)
+               callback();
+             })
+          })
+      
+      })
+
+
+    
+  }
 }
 
-//TODO:viewMgr(){
-       
+
+
+//TODO:viewMgr(){     
     // };
 
 // TODO: manager() {}
 
-// TODO: updateRole() {}
 
-module.exports = new employee();
+module.exports = new emp();
