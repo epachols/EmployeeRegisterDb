@@ -13,7 +13,7 @@ const connection = mysql.createConnection({
 
 // CAN ALSO WRITE A CONSTRUCTOR THAT WRITES THE STUFF FOR YOU!
 class view {
-    viewAll(){
+    viewAll(callback){
         console.log("you picked view all...\n");
         connection.query("SELECT employee.first_name, employee.last_name, role.title, role.salary, department.department FROM role INNER JOIN employee ON role_id = role.id INNER JOIN department ON department.id = role.department_id ORDER BY department ASC;",
          function (err, res) {
@@ -21,27 +21,41 @@ class view {
             console.log('\n \n');
             console.table(res);
             console.log('\n \n');
+            callback();
         });
     };
 
     //TODO:viewMgr(){
-        // bring back all manager possibilities, filter for uniqueness, set as options for choice
-        // "which manager" prompt, then bring ALL employees By that manager's employee Id, sorted descending salary.
+       
     // };
 
-    //TODO:viewDpt(){
-        // set a var equal to the department names returned by query.
-        // inq.prompt which department? (choices in question involve response from querying the departments)
-        //then takes selected department and brings tabularized employees by selected department (salary descending) 
-    // };
+    viewDpts(callback){
+        console.log("\n \n you picked view all departments...\n");
+        connection.query("SELECT department, id FROM department ORDER BY id ASC;",
+         function (err, res) {
+            if (err) throw err;
+            console.log('\n \n');
+            console.table(res);
+            console.log('\n \n');
+            callback();
+        });
+    };
 
-    // TODO:viewRoles(){
-    //     // view a list of employees by role,
-    //     console.log("you picked view employees by role...\n");
-    // };
+    viewRoles(callback){
+        console.log("you picked view employees by role...\n");
+        connection.query("SELECT title, salary, id FROM role ORDER BY id ASC;",
+         function (err, res) {
+             if (err) throw err;
+            console.log('\n \n');
+            console.table(res);
+            console.log('\n \n');
+            callback();
+        });
+    };
     
     // TODO:viewBudget(){
-    // this would involve querying for departments list and asking which department again
+    // this would involve asking which department
+    //then querying for an inner join of employee, department, and role, bringing back......
     // then taking passed department choice and bringing tabularized data as well as sum of all the 
     // "salary" items of the employees returned by department.  NOTE **this should be done after viewdept.**
     // };

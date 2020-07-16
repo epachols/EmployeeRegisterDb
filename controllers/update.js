@@ -42,8 +42,8 @@ class update {
           },
         ])
         .then(function (response) {
+            console.log("\n Adding new Employee to Database... \n");
           //response here being all the juicy deets that came out of the previous question
-          console.log(response);
           connection.query(
             "INSERT INTO employee (first_name, last_name, role_id) VALUES (?,?,?)",
             [
@@ -91,17 +91,11 @@ class update {
   }
 
 
-
-
-
-
-
-
-  removeDept() {
+  removeDept(callback) {
     console.log("you wish to consolidate departments...\n");
     // query departments, then inq.prompt list which department? THEN
     connection.query(
-        "SELECT department, id FROM department",
+        "SELECT department, id FROM department ORDER BY id",
         function (err, results) {
           let depArr = [];
           if (err) throw err;
@@ -119,18 +113,40 @@ class update {
               [depArr.indexOf(response.deptoDelete) + 1],
               function(err, results) {
                   if (err) throw err;
-                  console.log("Line 122 of update.js", "successfully removed the department in question.")
+                  console.log("\n Successfully removed the department in question.")
                   callback();
               })
   
           })
           //here ends the original query function
         });
-  }
+  } //works
 
 
 
-
+  addDept(callback) {
+      console.log("So you want to add a department... \n")
+    inq
+      .prompt([
+        {
+          type: "input",
+          message: "department to add",
+          name: "deptToAdd",
+        }
+      ])
+      .then(function ( { deptToAdd } ) {
+        console.log(deptToAdd);
+        connection.query(
+          "INSERT INTO department (department) VALUES (?)",
+          [deptToAdd],
+          function (err, res) {
+            if (err) throw err;
+            console.log("\n \n Successfully created new department. \n \n")
+            callback();
+          }
+        );
+      });
+  } //works
 
 
   removeRole() {
