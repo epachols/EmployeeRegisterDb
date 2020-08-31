@@ -23,8 +23,6 @@
   
 
   run the Command Line "node index", and you will be led through a series of questions after setting up your basic table information as a SQL database. (Run the included Scheme.sql code in mysql workbench and have a mySQL local server running to make full use of the app. 
-
-  - ![Preview](/assets/preview.png)
   
   
   ## Contributing:
